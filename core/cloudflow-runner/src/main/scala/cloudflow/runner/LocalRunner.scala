@@ -16,27 +16,27 @@
 
 package cloudflow.runner
 
-import java.io.{Closeable, File, FileOutputStream, OutputStream, PrintStream}
-import java.lang.{Runtime => JRuntime}
+import java.io.{ Closeable, File, FileOutputStream, OutputStream, PrintStream }
+import java.lang.{ Runtime => JRuntime }
 import java.nio.file._
 import java.util
 import java.util.Properties
 import java.util.concurrent.ExecutionException
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{ Await, Future }
 import scala.concurrent.duration.Duration
-import scala.util.{Failure, Success, Try}
+import scala.util.{ Failure, Success, Try }
 import scala.util.control.NonFatal
-import com.typesafe.config.{Config, ConfigFactory}
-import net.manub.embeddedkafka.{EmbeddedKafka, EmbeddedKafkaConfig}
+import com.typesafe.config.{ Config, ConfigFactory }
+import net.manub.embeddedkafka.{ EmbeddedKafka, EmbeddedKafkaConfig }
 import org.slf4j.LoggerFactory
 import spray.json._
-import cloudflow.blueprint.deployment.{ApplicationDescriptor, RunnerConfig, StreamletDeployment, StreamletInstance}
+import cloudflow.blueprint.deployment.{ ApplicationDescriptor, RunnerConfig, StreamletDeployment, StreamletInstance }
 import cloudflow.blueprint.deployment.ApplicationDescriptorJsonFormat._
 import cloudflow.runner.RunnerOps._
-import cloudflow.streamlets.{BooleanValidationType, DoubleValidationType, IntegerValidationType, StreamletExecution, StreamletLoader}
+import cloudflow.streamlets.{ BooleanValidationType, DoubleValidationType, IntegerValidationType, StreamletExecution, StreamletLoader }
 import com.typesafe.config.ConfigValueFactory
-import org.apache.kafka.clients.admin.{AdminClient, AdminClientConfig, NewTopic}
+import org.apache.kafka.clients.admin.{ AdminClient, AdminClientConfig, NewTopic }
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -247,10 +247,9 @@ object LocalRunner extends StreamletLoader {
     try {
       val tpics = localKafkaAdmin.listTopics
       val names = tpics.names.get
-    }
-    catch {
-      case e: InterruptedException =>  log.error(s"Connection to Kafka on address localhost:$port is not available"); System.exit(-1)
-      case e: ExecutionException  =>  log.error(s"Connection to Kafka on address localhost:$port is not available"); System.exit(-1)
+    } catch {
+      case e: InterruptedException => log.error(s"Connection to Kafka on address localhost:$port is not available"); System.exit(-1)
+      case e: ExecutionException   => log.error(s"Connection to Kafka on address localhost:$port is not available"); System.exit(-1)
     }
     //    implicit val kafkaConfig = EmbeddedKafkaConfig(kafkaPort = port)
     //    EmbeddedKafka.start()
