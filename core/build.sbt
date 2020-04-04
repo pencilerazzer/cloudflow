@@ -451,7 +451,7 @@ def cloudflowModule(moduleID: String): Project =
 lazy val bintraySettings =
   if (BintrayPlugin.isEnabledViaProp) {
     Seq(
-      bintrayOrganization := Some("lightbend"),
+      bintrayOrganization := Some("pencilerazzer"),
       bintrayRepository := "cloudflow",
       bintrayOmitLicense := true,
       publishMavenStyle := false,
@@ -464,7 +464,7 @@ lazy val bintraySettings =
   } else Seq.empty
 
 lazy val commonSettings = bintraySettings ++ Seq(
-        organization := "com.lightbend.cloudflow",
+        organization := "pencilerazzer",
         headerLicense := Some(HeaderLicense.ALv2("(C) 2016-2020", "Lightbend Inc. <https://www.lightbend.com>")),
         scalaVersion := Version.Scala,
         autoAPIMappings := true,
